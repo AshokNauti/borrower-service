@@ -6,6 +6,15 @@ public class UserDetail {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String port;
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
 
 	public long getId() {
 		return id;

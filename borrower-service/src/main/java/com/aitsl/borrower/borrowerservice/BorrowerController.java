@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,8 @@ public class BorrowerController {
 
 	@Autowired
 	DrawdownRepository drawdownRepository;
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("borrowers/{borrowerId}/loans/{loanId}")
 	public Loan getLoan(@PathVariable long borrowerId, @PathVariable String loanId) {
@@ -64,6 +68,8 @@ public class BorrowerController {
 			if (!userDetails.isPresent()) {
 				return null;
 			}
+			
+			logger.info("User Details: " + userDetails + " :::::::::::::: Port ::::::::: " + userDetails.get().getPort());
 
 			return loanRepository.findByLoanIdAndBorrowerId(loanId, borrowerId);
 		}
